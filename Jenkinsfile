@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
-withCredentials([
-    usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')
-]) {
+withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
     properties([
         parameters([
             string(defaultValue: "${DOCKER_USERNAME}", name: 'DOCKER_USERNAME'),
