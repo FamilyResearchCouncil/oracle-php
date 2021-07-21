@@ -3,29 +3,25 @@ withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 
     properties([
         parameters([
             string(defaultValue: "${DOCKER_USERNAME}", name: 'DOCKER_USERNAME'),
-            string(defaultValue: "${DOCKER_PASSWORD}", name: 'DOCKER_PASSWORD')
         ])
     ])
 }
 
 node('master') {
-    stage('build') {
-        checkout scm
+    checkout scm
 
-        sh "docker build ./7.4 -t oracle-php:7.4"
-        sh "docker tag oracle-php:7.4 ${params.DOCKER_USERNAME}/oracle-php:7.4"
-
-        sh "docker build ./8.0 -t oracle-php -t oracle-php:8.0 -t ${params.DOCKER_USERNAME}/oracle-php:8.0"
-        sh "docker tag oracle-php:8.0 ${params.DOCKER_USERNAME}/oracle-php:8.0"
+    stage('build 7.4') {
+        docker.build("oracle-php:7.4", './7.4')
+    }
+    stage('build 8.0'){
+        def image = docker.build("oracle-php:8.0", './8.0')
     }
 
     if( env.BRANCH_NAME == 'master' ){
-
         stage('push') {
-            sh "docker logout"
             docker.withRegistry('https://docker.io', 'dockerhub'){
-                sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
-                sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
+                docker.image('oracle-php:7.4').push("${params.DOCKER_USERNAME}/oracle-php:7.4")
+                docker.image('oracle-php:8.0').push("${params.DOCKER_USERNAME}/oracle-php:8.0")
             }
 
         }
