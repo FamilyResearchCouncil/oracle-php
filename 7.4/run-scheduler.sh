@@ -1,8 +1,0 @@
-#!/bin/bash
-
- while true
- do
-    echo '* Running Scheduler...'
-    /usr/bin/php /var/www/html/artisan schedule:run --verbose --no-interaction &
-    sleep 60;
- done
