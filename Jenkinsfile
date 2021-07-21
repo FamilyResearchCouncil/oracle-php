@@ -19,7 +19,7 @@ node('master') {
     if( env.BRANCH_NAME == 'master' ){
 
         stage('push') {
-            docker.withRegistry('https://index.docker.io/v2', 'dockerhub'){
+            docker.withRegistry('https://docker.io', 'dockerhub'){
                 sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
                 sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
             }
