@@ -19,11 +19,10 @@ node('master') {
     if( env.BRANCH_NAME == 'master' ){
 
         stage('push') {
-            // pull in oracle creds for dev database access
-            sh "echo '${params.DOCKER_PASSWORD}' | docker login -u ${params.DOCKER_USERNAME}"
-
-            sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
-            sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
+            docker.withRegistry('docker.io', 'dockerhub'){
+                sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
+                sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
+            }
         }
     }
 }
