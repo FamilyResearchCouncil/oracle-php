@@ -14,18 +14,18 @@ node('master') {
     stage('build') {
         checkout scm
 
-        sh 'docker build ./7.4 -t oracle-php:7.4 -t ${params.DOCKER_USERNAME}/oracle-php:7.4'
-        sh 'docker build ./8.0 -t oracle-php -t oracle-php:8.0 -t ${params.DOCKER_USERNAME}/oracle-php:8.0'
+        sh "docker build ./7.4 -t oracle-php:7.4 -t ${params.DOCKER_USERNAME}/oracle-php:7.4"
+        sh "docker build ./8.0 -t oracle-php -t oracle-php:8.0 -t ${params.DOCKER_USERNAME}/oracle-php:8.0"
     }
 
     if( env.BRANCH_NAME == 'master' ){
 
         stage('push') {
             // pull in oracle creds for dev database access
-            sh 'docker login -u ${params.DOCKER_USERNAME} -p ${params.DOCKER_PASSWORD}'
+            sh "docker login -u ${params.DOCKER_USERNAME} -p ${params.DOCKER_PASSWORD}"
 
-            sh 'docker push ${params.DOCKER_USERNAME}/oracle-php:7.4'
-            sh 'docker push ${params.DOCKER_USERNAME}/oracle-php:8.0'
+            sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
+            sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
         }
     }
 }
