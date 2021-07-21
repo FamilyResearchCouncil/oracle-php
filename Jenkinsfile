@@ -4,8 +4,8 @@ withCredentials([
 ]) {
     properties([
         parameters([
-            string(defaultValue: '${DOCKER_USERNAME}', name: 'DOCKER_USERNAME'),
-            string(defaultValue: '${DOCKER_PASSWORD}', name: 'DOCKER_PASSWORD')
+            string(defaultValue: "${DOCKER_USERNAME}", name: 'DOCKER_USERNAME'),
+            string(defaultValue: "${DOCKER_PASSWORD}", name: 'DOCKER_PASSWORD')
         ])
     ])
 }
