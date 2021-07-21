@@ -122,4 +122,5 @@ RUN apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && apt-get remove -y --purge software-properties-common
 
+RUN alias php='/usr/bin/php'
 
