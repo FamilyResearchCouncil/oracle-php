@@ -12,8 +12,8 @@ node('master') {
 
     if( env.BRANCH_NAME == 'master' ){
         stage('push') {
-            docker.image('oracle-php:7.4').push()
-            docker.image('oracle-php:8.0').push()
+            docker.image('oracle-php:7.4').push('familyresearchcouncil/oracle-php:7.4')
+            docker.image('oracle-php:8.0').push('familyresearchcouncil/oracle-php:8.0')
         }
     }
 }
