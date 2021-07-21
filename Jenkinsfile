@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 node('master') {
     checkout scm
-    withRegistry('', 'dockerhub'){
+    docker.withRegistry('', 'dockerhub'){
 
         stage('7.4') {
             def image = docker.build("familyresearchcouncil/oracle-php", './7.4')
