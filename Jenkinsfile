@@ -23,6 +23,8 @@ node('master') {
                 sh "docker push ${params.DOCKER_USERNAME}/oracle-php:7.4"
                 sh "docker push ${params.DOCKER_USERNAME}/oracle-php:8.0"
             }
+
+            sh "docker logout"
         }
     }
 }
