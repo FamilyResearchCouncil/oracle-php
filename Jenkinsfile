@@ -20,8 +20,8 @@ node('master') {
     if( env.BRANCH_NAME == 'master' ){
         stage('push') {
             docker.withRegistry('https://docker.io', 'dockerhub'){
-                docker.image('oracle-php:7.4').push()
-                docker.image('oracle-php:8.0').push()
+                docker.image('familyresearchcouncil/oracle-php:7.4').push()
+                docker.image('familyresearchcouncil/oracle-php:8.0').push()
             }
 
         }
