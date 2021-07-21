@@ -11,9 +11,6 @@ withCredentials([
 }
 
 node('master') {
-    stage('dockerhub-login') {
-    }
-
     stage('build') {
         checkout scm
 
