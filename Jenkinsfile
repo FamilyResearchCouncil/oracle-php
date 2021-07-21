@@ -1,10 +1,19 @@
 #!/usr/bin/env groovy
+withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+    properties([
+        parameters([
+            string(defaultValue: '${DOCKER_USERNAME}', name: 'DOCKER_USERNAME'),
+            string(defaultValue: '${DOCKER_PASSWORD}', name: 'DOCKER_PASSWORD')
+        ])
+    ])
+}
+
 node('master') {
     stage('dockerhub-login') {
         checkout scm
         // pull in oracle creds for dev database access
         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+            sh "docker login -u ${params.DOCKER_USERNAME} -p ${params.DOCKER_PASSWORD}"
         }
 
     }
