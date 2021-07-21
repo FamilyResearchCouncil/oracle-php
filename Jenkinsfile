@@ -22,7 +22,7 @@ node('master') {
 
         stage('push') {
             // pull in oracle creds for dev database access
-            sh "docker login -u ${params.DOCKER_USERNAME} -p ${params.DOCKER_PASSWORD}"
+            sh 'docker login -u ${params.DOCKER_USERNAME} -p ${params.DOCKER_PASSWORD}'
 
             sh 'docker push ${params.DOCKER_USERNAME}/oracle-php:7.4'
             sh 'docker push ${params.DOCKER_USERNAME}/oracle-php:8.0'
