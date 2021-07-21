@@ -17,8 +17,8 @@ node('master') {
     stage('build') {
         checkout scm
 
-        sh 'docker build ./7.4 -t oracle-php -t oracle-php:7.4 -t ${DOCKER_USERNAME}/oracle-php:7.4'
-        sh 'docker build ./8.0 -t oracle-php -t oracle-php:7.4 -t ${DOCKER_USERNAME}/oracle-php:8.0'
+        sh 'docker build ./7.4 -t oracle-php -t oracle-php:7.4 -t ${params.DOCKER_USERNAME}/oracle-php:7.4'
+        sh 'docker build ./8.0 -t oracle-php -t oracle-php:7.4 -t ${params.DOCKER_USERNAME}/oracle-php:8.0'
     }
 
     if( env.BRANCH_NAME == 'master' ){
