@@ -19,6 +19,7 @@ node('master') {
 
     if( env.BRANCH_NAME == 'master' ){
         stage('push') {
+            sh 'docker logout https://docker.io'
             docker.withRegistry('https://docker.io', 'dockerhub'){
                 docker.image('familyresearchcouncil/oracle-php:7.4').push()
                 docker.image('familyresearchcouncil/oracle-php:8.0').push()
