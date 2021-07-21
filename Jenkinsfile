@@ -13,6 +13,7 @@ node('master') {
         stage('8.0'){
             def image = docker.build("familyresearchcouncil/oracle-php", './8.0')
             if( env.BRANCH_NAME == 'master' ){
+                image.push()
                 image.push('8.0')
             }
         }
