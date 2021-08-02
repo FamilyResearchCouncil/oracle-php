@@ -51,6 +51,8 @@ RUN add-apt-repository ppa:ondrej/php \
         libyaml-dev \
         libicu-dev \
         libsmbclient-dev \
+        redis-tools \
+        iputils-ping \
         supervisor \
         python2 \
         nginx \
