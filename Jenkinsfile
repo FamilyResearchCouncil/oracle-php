@@ -3,7 +3,7 @@ node('master') {
     checkout scm
     docker.withRegistry('', 'dockerhub'){
         stage('build'){
-            parallel 
+            parallel([
                 7.4: {
                     def image = docker.build("familyresearchcouncil/oracle-php", './7.4')
                     if( env.BRANCH_NAME == 'master' ){
@@ -17,6 +17,7 @@ node('master') {
                         image.push('8.0')
                     }
                 }
+            ])
         }
     }
 }
